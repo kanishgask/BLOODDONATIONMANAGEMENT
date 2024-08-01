@@ -1,0 +1,344 @@
+package blooddonationproject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
+class Donor {
+    private String name;
+    private int age;
+    private String bloodType;
+    private String contactNumber;
+    private Date lastDonationDate;
+
+    public Donor(String name, int age, String bloodType, String contactNumber, Date lastDonationDate) {
+        this.name = name;
+        this.age = age;
+        this.bloodType = bloodType;
+        this.contactNumber = contactNumber;
+        this.lastDonationDate = lastDonationDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public Date getLastDonationDate() {
+        return lastDonationDate;
+    }
+
+    public void setLastDonationDate(Date lastDonationDate) {
+        this.lastDonationDate = lastDonationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Donor{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", bloodType='" + bloodType + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", lastDonationDate=" + lastDonationDate +
+                '}';
+    }
+}
+
+class BloodInventory {
+    private String bloodType;
+    private int quantity;
+
+    public BloodInventory(String bloodType, int quantity) {
+        this.bloodType = bloodType;
+        this.quantity = quantity;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void addBlood(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public void useBlood(int quantity) {
+        this.quantity -= quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "BloodInventory{" +
+                "bloodType='" + bloodType + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
+}
+
+class DonationEvent {
+    private String eventName;
+    private Date eventDate;
+    private String location;
+    private List<Donor> donors;
+
+    public DonationEvent(String eventName, Date eventDate, String location) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.location = location;
+        this.donors = new ArrayList<>();
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public List<Donor> getDonors() {
+        return donors;
+    }
+
+    public void addDonor(Donor donor) {
+        this.donors.add(donor);
+    }
+
+    @Override
+    public String toString() {
+        return "DonationEvent{" +
+                "eventName='" + eventName + '\'' +
+                ", eventDate=" + eventDate +
+                ", location='" + location + '\'' +
+                ", donors=" + donors +
+                '}';
+    }
+}
+
+class Recipient {
+    private String name;
+    private String bloodType;
+    private String contactNumber;
+    private String hospital;
+
+    public Recipient(String name, String bloodType, String contactNumber, String hospital) {
+        this.name = name;
+        this.bloodType = bloodType;
+        this.contactNumber = contactNumber;
+        this.hospital = hospital;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipient{" +
+                "name='" + name + '\'' +
+                ", bloodType='" + bloodType + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", hospital='" + hospital + '\'' +
+                '}';
+    }
+}
+
+public class blooddonationproject{
+    private List<Donor> donors;
+    private List<BloodInventory> bloodInventories;
+    private List<DonationEvent> donationEvents;
+    private List<Recipient> recipients;
+
+    public blooddonationproject() {
+        this.donors = new ArrayList<>();
+        this.bloodInventories = new ArrayList<>();
+        this.donationEvents = new ArrayList<>();
+        this.recipients = new ArrayList<>();
+    }
+
+    public void addDonor(Donor donor) {
+        donors.add(donor);
+    }
+
+    public void addBloodInventory(BloodInventory bloodInventory) {
+        bloodInventories.add(bloodInventory);
+    }
+
+    public void addDonationEvent(DonationEvent donationEvent) {
+        donationEvents.add(donationEvent);
+    }
+
+    public void addRecipient(Recipient recipient) {
+        recipients.add(recipient);
+    }
+
+    public List<Donor> getDonors() {
+        return donors;
+    }
+
+    public List<BloodInventory> getBloodInventories() {
+        return bloodInventories;
+    }
+
+    public List<DonationEvent> getDonationEvents() {
+        return donationEvents;
+    }
+
+    public List<Recipient> getRecipients() {
+        return recipients;
+    }
+
+    public void displayAllDonors() {
+        for (Donor donor : donors) {
+            System.out.println(donor);
+        }
+    }
+
+    public void displayAllBloodInventories() {
+        for (BloodInventory inventory : bloodInventories) {
+            System.out.println(inventory);
+        }
+    }
+
+    public void displayAllDonationEvents() {
+        for (DonationEvent event : donationEvents) {
+            System.out.println(event);
+        }
+    }
+    public void displayAllRecipients() {
+        for (Recipient recipient : recipients) {
+            System.out.println(recipient);
+        }
+    }
+
+    public static void main(String[] args) {
+        blooddonationproject system = new blooddonationproject();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Blood Donation Management System");
+
+        while (true) {
+            System.out.println("1. Add Donor");
+            System.out.println("2. Add Blood Inventory");
+            System.out.println("3. Add Donation Event");
+            System.out.println("4. Add Recipient");
+            System.out.println("5. Display All Donors");
+            System.out.println("6. Display All Blood Inventories");
+            System.out.println("7. Display All Donation Events");
+            System.out.println("8. Display All Recipients");
+            System.out.println("9. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Donor Name: ");
+                    String donorName = scanner.nextLine();
+                    System.out.print("Enter Donor Age: ");
+                    int donorAge = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    System.out.print("Enter Donor Blood Type: ");
+                    String donorBloodType = scanner.nextLine();
+                    System.out.print("Enter Donor Contact Number: ");
+                    String donorContact = scanner.nextLine();
+                    Date donorLastDonationDate = new Date();  // Simplified for example
+
+                    Donor donor = new Donor(donorName, donorAge, donorBloodType, donorContact, donorLastDonationDate);
+                    system.addDonor(donor);
+                    break;
+
+                case 2:
+                    System.out.print("Enter Blood Type: ");
+                    String bloodType = scanner.nextLine();
+                    System.out.print("Enter Quantity: ");
+                    int quantity = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+
+                    BloodInventory bloodInventory = new BloodInventory(bloodType, quantity);
+                    system.addBloodInventory(bloodInventory);
+                    break;
+
+                case 3:
+                    System.out.print("Enter Event Name: ");
+                    String eventName = scanner.nextLine();
+                    Date eventDate = new Date();  // Simplified for example
+                    System.out.print("Enter Location: ");
+                    String location = scanner.nextLine();
+
+                    DonationEvent donationEvent = new DonationEvent(eventName, eventDate, location);
+                    system.addDonationEvent(donationEvent);
+                    break;
+
+                case 4:
+                    System.out.print("Enter Recipient Name: ");
+                    String recipientName = scanner.nextLine();
+                    System.out.print("Enter Recipient Blood Type: ");
+                    String recipientBloodType = scanner.nextLine();
+                    System.out.print("Enter Recipient Contact Number: ");
+                    String recipientContact = scanner.nextLine();
+                    System.out.print("Enter Hospital: ");
+                    String hospital = scanner.nextLine();
+
+                    Recipient recipient = new Recipient(recipientName, recipientBloodType, recipientContact, hospital);
+                    system.addRecipient(recipient);
+                    break;
+
+                case 5:
+                    system.displayAllDonors();
+                    break;
+
+                case 6:
+                    system.displayAllBloodInventories();
+                    break;
+
+                case 7:
+                    system.displayAllDonationEvents();
+                    break;
+
+                case 8:
+                    system.displayAllRecipients();
+                    break;
+
+                case 9:
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+}
